@@ -1,6 +1,6 @@
-const fs = require('fs');
-const http = require('http');
-
+const fs = require("fs");
+const http = require("http");
+const url = require("url");
 
 //////////////////////////////////////////
 // Files
@@ -28,17 +28,23 @@ const http = require('http');
 // });
 // console.log('started reading');
 
-
 //////////////////////////////////////////
 // Server
 const server = http.createServer((req, res) => {
-    console.log(req);
+  console.log(req.url);
 
-    res.end('Hello from the server!');
-})
+  const pathname = req.url;
 
-// server.listen('8000', 'localhost', )
-server.listen('8000', '127.0.0.1', () => {
-    console.log('listening on port 8000');
+  if (pathname === "/" || pathname === "/overview") {
+    res.end("TODO overview page");
+  } else if (pathname === "/product") {
+    res.end("TODO product page");
+  } else {
+    res.end("url not found");
+  }
 });
 
+// server.listen('8000', 'localhost', )
+server.listen("8000", "127.0.0.1", () => {
+  console.log("listening on port 8000");
+});
